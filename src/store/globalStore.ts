@@ -9,8 +9,8 @@ interface IGlobalStoreValue {
   login(user: IUser | null): void;
   logout(): void;
   addTodo(title: string): void;
-  // toggleTodoDone(todoId: number): void;
-  // removeTodo(todoId: number): void;
+  toggleTodoDone(todoId: number): void;
+  removeTodo(todoId: number): void;
 }
 
 export const globalStore = createStore<IGlobalStoreValue>((setState) => ({
@@ -25,6 +25,25 @@ export const globalStore = createStore<IGlobalStoreValue>((setState) => ({
     setState({ user: null });
   },
   addTodo: (title: string) => {
-    setState((prevState) => ({ todos: prevState.todos }));
+    setState((prevState) => ({
+      todos: prevState.todos.concat({
+        id: Date.now(),
+        author: prevState.user?.name ?? 'Convidado',
+        title,
+        done: false,
+      }),
+    }));
+  },
+  toggleTodoDone: (todoId) => {
+    setState((prevState) => ({
+      todos: prevState.todos.map((todo) =>
+        todo.id === todoId ? { ...todo, done: !todo.done } : todo,
+      ),
+    }));
+  },
+  removeTodo: (todoId) => {
+    setState((prevState) => ({
+      todos: prevState.todos.filter((todo) => todo.id !== todoId),
+    }));
   },
 }));
