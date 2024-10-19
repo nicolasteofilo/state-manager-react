@@ -6,7 +6,7 @@
   <h3 align="center">Simple React State Manager</h3>
 
   <p align="center">
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://state-manager.nicolasteofilo.dev/" target="_blank">View Demo</a>
     ·
     <a href="https://github.com/nicolasteofilo/state-manager-react/issues/new">Report Bug</a>
     ·
